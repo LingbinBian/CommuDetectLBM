@@ -7,7 +7,6 @@ Copyright (c) 2025, Lingbin Bian
 Main functions of community detection:
 CommuDetectLBM.m (individual-level community detection)
 CommuDetectGroup.m (group-level community detection)
-
 A simple demonstration:
 DEMO_community_detection.m
 ---------------------------------------------------------------------------
