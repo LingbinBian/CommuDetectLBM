@@ -40,7 +40,9 @@ Directory structure:
 Data---synthetic---DIIV10---n0.3162---1001...1100
 
                 |        ---n0.5623
+
                 |        ---n1
+
                 |        ---n1.7783
                 |        ---n3.1623
                 |        ---n5.6234
