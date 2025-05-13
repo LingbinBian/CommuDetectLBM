@@ -36,7 +36,9 @@ Experiments: synthetic data analysis
 Directory structure:
 
                    (DIIV)    (SNR)     (subject)
+                   
 Data---synthetic---DIIV10---n0.3162---1001...1100
+
                 |        ---n0.5623
                 |        ---n1
                 |        ---n1.7783
