@@ -1,5 +1,5 @@
 Hierarchical Bayesian inference for community detection and connectivity of functional brain networks
-
+---------------------------------------------------------------------------
 Version 1.0
 12-April-2025
 Copyright (c) 2025, Lingbin Bian
@@ -12,7 +12,7 @@ CommuDetectGroup.m
 A simple demonstration:
 
 DEMO_community_detection.m
----------------------------------------------------------------------------
+
 The code of the study in the paper is under the directory: HBI_CommuDetect
 The code for processing working memory task-fMRI is under the directory: tfMRI_Data_HCP
 Some pictures of the results are under the directory: Pictures_community_labels
