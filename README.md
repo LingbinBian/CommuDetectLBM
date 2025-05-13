@@ -5,17 +5,17 @@ Version 1.0
 Copyright (c) 2025, Lingbin Bian
 
 Main functions of community detection:
-
+---------------------------------------------------------------------------
 CommuDetectLBM.m
 CommuDetectGroup.m
 
 A simple demonstration:
-
+---------------------------------------------------------------------------
 DEMO_community_detection.m
 
-The code of the study in the paper is under the directory: HBI_CommuDetect
-The code for processing working memory task-fMRI is under the directory: tfMRI_Data_HCP
-Some pictures of the results are under the directory: Pictures_community_labels
+The code of the study in the paper: HBI_CommuDetect
+The code for processing working memory task-fMRI:tfMRI_Data_HCP
+Some pictures of the results: Pictures_community_labels
 ---------------------------------------------------------------------------
 How to sun the code of the study in the paper: 
 ---------------------------------------------------------------------------
