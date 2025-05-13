@@ -5,9 +5,12 @@ Version 1.0
 Copyright (c) 2025, Lingbin Bian
 ---------------------------------------------------------------------------
 Main functions of community detection:
+
 CommuDetectLBM.m
 CommuDetectGroup.m
+
 A simple demonstration:
+
 DEMO_community_detection.m
 ---------------------------------------------------------------------------
 The code of the study in the paper is under the directory: HBI_CommuDetect
