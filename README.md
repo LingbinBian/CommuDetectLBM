@@ -32,6 +32,7 @@ How to sun the code of the study in the paper:
 Experiments: synthetic data analysis
 ---------------------------------------------------------------------------
 1.Use create_simu_dir.sh to create the directory of synthetic data.
+---------------------------------------------------------------------------
 
 Directory structure:
 
