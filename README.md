@@ -27,7 +27,7 @@ Some pictures of the results:
 Pictures_community_labels
 
 ---------------------------------------------------------------------------
-How to sun the code of the study in the paper: 
+How to run the code of the study in the paper: 
 ---------------------------------------------------------------------------
 Experiments: synthetic data analysis
 ---------------------------------------------------------------------------
