@@ -162,6 +162,7 @@ MANIP_individual_calcu_NMI_real_multilayer_modularity.m
 11.between subject consistency and subject-specific to group consistency
 ---------------------------------------------------------------------------
 Between subjects:
+
 MANIP_individual_between_subjects_2b0bfix_NMI_real_LBM.m
 
 subject-specific to group:
@@ -169,7 +170,8 @@ subject-specific to group:
 MANIP_individual_subject2group_2b0bfix_NMI_real_LBM.m
 
 Between conditions:
-MANIP_individual_between_conditions_2b0bfix_NMI_real_LBM
+
+MANIP_individual_between_conditions_2b0bfix_NMI_real_LBM.m
 
 12.Visualize brain networks by brain netviewer
 ---------------------------------------------------------------------------
