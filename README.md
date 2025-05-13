@@ -40,9 +40,7 @@ Directory structure:
 Data---synthetic---DIIV10---n0.3162---1001...1100
 
                 |        ---n0.5623
-
                 |        ---n1
-
                 |        ---n1.7783
                 |        ---n3.1623
                 |        ---n5.6234
@@ -69,7 +67,9 @@ where the folder name 'DIIV' indicates the degree of inter-individual variation,
 DEMO_individual_LBM.m (synthetic data: data_type=0)
 Directory structure:
                           (DIIV)    (SNR) 
+                          
 Results---synthetic_LBM---DIIV10---n0.3162
+
                 |               ---n0.5623
                 |               ---n1
                 |               ---n1.7783
@@ -88,8 +88,11 @@ Results---synthetic_LBM---DIIV10---n0.3162
                 ...
 
 DEMO_individual_modularity.m (synthetic data: data_type=0)
+
                                  (DIIV)    (SNR)     (gamma)
+                                 
 Results---synthetic_modularity---DIIV10---n0.3162---1 1.2 ... 2
+
                 |                      ---n0.5623
                 |                      ---n1
                 |                      ---n1.7783
@@ -97,7 +100,9 @@ Results---synthetic_modularity---DIIV10---n0.3162---1 1.2 ... 2
                 |                      ---n5.6234
                 |                      ---n10
                 |                      ---n17.7828
+                
                 |----------------DIIV20---n0.3162
+            
                 |                      ---n0.5623
                 |                      ---n1
                 |                      ---n1.7783
@@ -113,12 +118,15 @@ DEMO_individual_multilayer_modularity.m (comparison with multilayer modularity)
 4.Comparing the estimated individual community mememberships with the ground truth (individual-level analysis) using normalized mutual information (NMI)
 ---------------------------------------------------------------------------
 MANIP_individual_calcu_NMI_LBM.m 
+
 MANIP_individual_calcu_NMI_modularity.m
+
 MANIP_individual_calcu_NMI_multilayer_modularity.m
 
 5.Statistical analysis (individual-level analysis)
 ---------------------------------------------------------------------------
 DEMO_individual_statistical_analysis_modularity.m (LBM vs modularity)
+
 DEMO_individual_statistical_analysis_multilayer_modularity.m (LBM vs multilayer modularity)
 
 6.SNR analysis, NMI of LBM against different levels of SNR (individual-level analysis)
