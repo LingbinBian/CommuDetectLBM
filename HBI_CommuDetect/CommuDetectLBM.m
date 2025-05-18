@@ -33,6 +33,7 @@ function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x)
 
 % parameters of Markov chain
 % K_ini=5;
+% K_max=20;
 % Itera=2000;
 % burnin_ite=500; 
 % S=400; % sample size
@@ -53,6 +54,7 @@ kappa_sq=1;
 
 % parameters of Markov chain
 K_ini=5;
+K_max=20;
 Itera=2000;
 burnin_ite=500;
 S=400;
@@ -68,7 +70,7 @@ priorpra=struct('nu',nu,...
             
 N=length(x);
 % MCMC allocation sampler
-[z_chain,prob_chain,accep_r_array,K_chain]=MCMC_allocation_sampler(x,K_ini,priorpra);
+[z_chain,prob_chain,accep_r_array,K_chain]=MCMC_allocation_sampler(x,K_ini,K_max,priorpra);
 
 
 K_pos=zeros(1,S);
@@ -95,7 +97,7 @@ end
 
  
 %--------------------------------------------------------------------------
-function [z_chain,prob_chain,accep_r,K_chain]=MCMC_allocation_sampler(x,K,priorpra)
+function [z_chain,prob_chain,accep_r,K_chain]=MCMC_allocation_sampler(x,K,K_max,priorpra)
 
 % Metroplis-Hastings with Gibbs move, M3 move and AE move
 %
@@ -154,7 +156,7 @@ for ite=2:Itera
         end            
     elseif ind==1
        [z_chain(:,ite),prob_chain(1,ite),accep_r(1,ite),K_chain(1,ite)]...
-           =move_AE(z_chain(:,ite-1),x,N);
+           =move_AE(z_chain(:,ite-1),x,N,K_max);
     end        
 end
 
@@ -439,7 +441,7 @@ end
         end
     %----------------------------------------------------------------------
     % AE move -------------------------------------------------------------
-    function [z_star,prob_chain,accep_r,K_star]=move_AE(z,x,N)
+    function [z_star,prob_chain,accep_r,K_star]=move_AE(z,x,N,K_max)
     % This function is the absorption-ejection move
     % Input: z: current state
     %        x: observation, a correlation matrix
@@ -448,7 +450,7 @@ end
     %         prob_chain: posterior probability
     %         accep_r: acceptance ratio
     
-        K_max=20;
+       % K_max=20;
         if max(z)==K_max
             p_ek=0;
         elseif max(z)==1
