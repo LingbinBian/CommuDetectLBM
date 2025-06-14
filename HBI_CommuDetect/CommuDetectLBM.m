@@ -1,22 +1,27 @@
-function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x)
+function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x,K_max)
 % Community detection for a single adjacency matrix
 % Latent block model (LBM) with Markov chain Monte Carlo (MCMC) allocation sampler
-%
+% Syntax:
+%      default:
+%      [z_esti]=CommuDetectLBM(x)
+%      standard:
+%      [z_esti,K,z_chain,K_chain]=CommuDetectLBM(x,K_max)
 % Input:
-%         x: NxN adjacency matrix 
-%
+%      x: an NxN adjacency matrix 
+%      K_max: proposed maximum possible number of communities
 % Output:
-%         z_esti: a vector of community memberships
-%         K: number of communities
-%         z_chain: a generated Markov chain updating community memberships (N x Itera matrix)
-%         K_chain: a generated chain of the number of communities
+%      z_esti: an estimated vector of community memberships
+%      K: estimated number of communities
+%      z_chain: a generated Markov chain updating community memberships (an NxItera matrix)
+%      K_chain: a generated chain of the number of communities
 %
-% In this function, the users can set several parameters of the
-% model. These parameters are divided into two sets. The first sets of
-% parameters are the prior hyper-parameters of the latent block model
-% including nu,rho,xi, and kappa_sq, where xi and kappa_sq are the parameters of the distribution of block mean
+% In this function, users can set several model parameters.
+% These parameters are divided into two sets. The first set of
+% parameters contains the prior hyper-parameters of the latent block model
+% including nu, rho, xi, and kappa_sq, where xi and kappa_sq are the
+% parameters of the distribution of block mean,
 % and nu and rho are the parameters of the distribution of block variance.
-% The second sets of parameters are related to the generated Markov chain,
+% The second set of parameters is related to the generated Markov chain,
 % K_ini is the initial assumption of the number of communities at the first
 % step of the chain, Itera is the total number of steps of the chain,
 % bunin_ite is the burn-in steps, S is the thinning value and
@@ -33,7 +38,6 @@ function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x)
 
 % parameters of Markov chain
 % K_ini=5;
-% K_max=20;
 % Itera=2000;
 % burnin_ite=500; 
 % S=400; % sample size
@@ -44,8 +48,14 @@ function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x)
 % Copyright (c) 2025, Lingbin Bian, 
 % Contact via email: lingbin.bian@gmail.com
 %--------------------------------------------------------------------------
+
+if nargin==1
+    % default assumption of maximum possible number of communities  
+    K_max=20;
+end
+
 % Parameter setting
-%--------------------------------------------------------------------------
+
 % Prior hyper-parameters of latent block model
 nu=3;
 rho=0.02;
@@ -54,7 +64,6 @@ kappa_sq=1;
 
 % parameters of Markov chain
 K_ini=5;
-K_max=20;
 Itera=2000;
 burnin_ite=500;
 S=400;
@@ -99,17 +108,18 @@ end
 %--------------------------------------------------------------------------
 function [z_chain,prob_chain,accep_r,K_chain]=MCMC_allocation_sampler(x,K,K_max,priorpra)
 
-% Metroplis-Hastings with Gibbs move, M3 move and AE move
+% Metroplis-Hastings with Gibbs move, M3 move and AE moves
 %
 % Input: 
-%   x: the observation, a correlation matrix of the network
-%   K: Initialize the number of communities
-%   priorpra: a struct containing the prior hyper parameters
+%   x: an adjacency matrix
+%   K: initialized number of communities
+%   priorpra: a struct containing the prior hyper parameters and iteration
+%   of the chain
 %
-% Output: z_chain: a Markov chain, N x Itera matrix
-%         prob_chain: posterior probability of the state
+% Output: z_chain: a Markov chain, an NxItera matrix
+%         prob_chain: posterior probability of each step
 %         accep_r: acceptance ratio of each step
-%         K_chain: number of communities of each state
+%         K_chain: number of communities of each step
 %
 % Version 1.0
 % 15-March-2020
@@ -119,7 +129,7 @@ function [z_chain,prob_chain,accep_r,K_chain]=MCMC_allocation_sampler(x,K,K_max,
 % -------------------------------------------------------------------------
 % Markov chain Monte Carlo
 
-a=1;
+a=1; % parameter of Beta distribution in AE moves
 
 N=length(x);
 latent_ini=latent_initial(N,K);   % initialization
@@ -138,7 +148,7 @@ K_chain(1,1)=max(latent_ini);
 
 for ite=2:Itera
    
-    fprintf('MCMC iteration, total steps: 2000, step: %d\n',ite);
+    fprintf('MCMC iteration, step: %d\n',ite);
     p_AE=0.5;
     ind=binornd(1,p_AE);
     %ind=randi(2);
@@ -147,7 +157,7 @@ for ite=2:Itera
         ind_gibbs=binornd(1,p_gibbs);
         if ind_gibbs==0 && K_chain(1,ite-1)>1 
           [z_chain(:,ite),prob_chain(1,ite),accep_r(1,ite)]...
-              =move_M_3(z_chain(:,ite-1),x,K_chain(1,ite-1),N);
+              =move_M3(z_chain(:,ite-1),x,K_chain(1,ite-1),N);
            K_chain(1,ite)=max(z_chain(:,ite));           
         else
             [z_chain(:,ite),prob_chain(1,ite),accep_r(1,ite)]...
@@ -174,7 +184,7 @@ end
      end
 
 
-     % Gibbs sampling
+     % Gibbs move
 
      function [ z, prob_chain,accep_r ] = move_gibbs(z,x,K,N )  % Computational Complexity: O((K^2+N^2)K)
             % p(z_i|z_-i,x)  for i=1:N
@@ -186,14 +196,8 @@ end
             
             for k=1:K
                 z(i)=k;            
-                prob(i,k)=log(1/(factorial(K))*exp(-1))+pos_z_K(z,K,N)+gauss_x_z(z,x,K,N);            
-                %               prob(i,k)=log(1/(factorial(K))*exp(-1))+Pos_z_K(z,K,N)+Gauss_x_z(z,x,K,N) % log(p(x|z]))
-                %               prob_sum(i)=prob_sum(i)+prob(i,k);
+                prob(i,k)=log(1/(factorial(K))*exp(-1))+pos_z_K(z,K,N)+gauss_x_z(z,x,K,N); % posterior probability            
             end
-            %           log_sum(i)=prob(i,1);
-            %           for k=2:K
-            %               log_sum(i)=ln_sum(log_sum(i),prob(i,k));
-            %           end
             log_sum(i)=logsumexp(prob(i,:)');
             for k=1:K
                 prob_n(i,k)=prob(i,k)-log_sum(i);% normalized posterior probability            
@@ -238,18 +242,18 @@ end
     
     % ---------------------------------------------------------------------
     % ---------------------------------------------------------------------
-    % MCMC with M3
-    function [z_star,prob_chain,accep_r]=move_M_3(z,x,K,N)   % K^2+N^2+L^2
-    % This function is the Absorption-Ejection move
-    % Input: z: current state
-    %        x: observation, a correlation matrix
-    %        K: maximum value of community number
+    % M3 move
+    function [z_star,prob_chain,accep_r]=move_M3(z,x,K,N)   % O(K^2+N^2+LN^2)
+    % This function is the M3 move
+    % Input: z: latent labels at current step
+    %        x: adjacency matrix
+    %        K: number of communities of the current step
     %        N: number of nodes
     % Output: z_star: the updated state
     %         prob_chain: posterior probability
     %         accep_r: acceptance ratio
         
-        [z_update,propmove_ratio]=proposal_move(z,x,K,N);   % M3 move 
+        [z_update,propmove_ratio]=proposal_M3_move(z,x,K,N);   % M3 move 
         r=pos(z_update,x,K,N)-pos(z,x,K,N)+log(propmove_ratio);
         r=exp(r);
         accep_r=min(1,r);
@@ -264,9 +268,9 @@ end
     end
         
     % ---------------------------------------------------------------------
-        function [z_update,propmove_ratio]=proposal_move(z,x,K,N) % Computational cost: N+L^2
+    function [z_update,propmove_ratio]=proposal_M3_move(z,x,K,N) % Computational cost: O(LN^2)
         % The M3 move 
-        % randomly select two clusters
+        % randomly select two communities
         
         p=randsample(1:K,2);
         k_1=p(1);  % k1
@@ -302,7 +306,7 @@ end
       
         L_list=length(z_list);    
         propmove_ratio=1;
-        while L_list~=0    % L(N-L+L^2)
+        while L_list~=0    % O((N-L+1)^2+(N-L+2)^2+...(N)^2)=O(LN^2)
             [z_tilde,z_list,L_list,propmove_ratio]...
                 =z_tilde_update(x,z_tilde,z_list,propmove_ratio,k_1,k_2); 
         end
@@ -312,7 +316,7 @@ end
     
     %----------------------------------------------------------------------
         function [z_tilde,z_list,L_list,propmove_ratio]...
-                =z_tilde_update(x,z_tilde,z_list,propmove_ratio,k_1,k_2)  % N-L+L^2
+                =z_tilde_update(x,z_tilde,z_list,propmove_ratio,k_1,k_2)  % O((N-L+1)^2)=O(N^2), N>>L
         % This function updates z~ and the list of z in A={i: z_i = k1 or k2}
            
             L_list=length(z_list(:,1));  % length of list
@@ -412,7 +416,7 @@ end
             end
         end
     %----------------------------------------------------------------------
-        function [p_block]=p_b(x_block) 
+        function [p_block]=p_b(x_block) % O(N_b^2)
         % block log likelihood
              nu=priorpra.nu;    % sigma_kl^2 ~ IG(nu/2,rho/2)
              rho=priorpra.rho;    
@@ -444,7 +448,7 @@ end
     function [z_star,prob_chain,accep_r,K_star]=move_AE(z,x,N,K_max)
     % This function is the absorption-ejection move
     % Input: z: current state
-    %        x: observation, a correlation matrix
+    %        x: adjacency matrix
     %        N: number of nodes
     % Output: z_star: the updated state
     %         prob_chain: posterior probability
@@ -480,7 +484,7 @@ end
             
     %----------------------------------------------------------------------
     % ejection
-            function [z_update,propmove_ratio]=proposal_eject(z,N)             
+            function [z_update,propmove_ratio]=proposal_eject(z,N)  %O(N)         
                 K_z=max(z);
                 K_r=randsample(1:K_z,1);           
                 k_1=K_r;
@@ -509,7 +513,7 @@ end
             end
     %----------------------------------------------------------------------  
     % absorption
-            function [z_update,propmove_ratio]=proposal_absorb(z,N)           
+            function [z_update,propmove_ratio]=proposal_absorb(z,N) % O(N)          
                 K_z=max(z);
                 K_r=randsample(1:(K_z-1),1);
                 k_1=K_r;
@@ -544,11 +548,11 @@ end
         end
     %----------------------------------------------------------------------
     % log(p(x|z))
-        function [ P_x_z] = gauss_x_z(z,x,K,N)   % O(K^2+N^2)
+        function [P_x_z] = gauss_x_z(z,x,K,N)   % O(K^2+N^2)
             W=zeros(K,K);     % number of elements in the block
             w_sum=zeros(K,K);    % weights in the block
             w_sumsq=zeros(K,K);   % weight^2 in the block
-            m_k=zeros(K,1);   % number of nodes in the cluster     
+            m_k=zeros(K,1);   % number of nodes in the community    
     
             nu=priorpra.nu;    % sigma_kl^2 ~ IG(nu/2,rho/2)
             rho=priorpra.rho;    
@@ -596,7 +600,7 @@ end
     %----------------------------------------------------------------------
     % log(p(z|K))
         function [ P_z_K ] = pos_z_K(z,K,N)  % O(N+K)
-            m_k=zeros(K,1); % number of nodes in the cluster
+            m_k=zeros(K,1); % number of nodes in the community
           
             for i=1:N
                 m_k(z(i))=m_k(z(i))+1;
