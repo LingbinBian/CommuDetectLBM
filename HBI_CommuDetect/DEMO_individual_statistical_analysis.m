@@ -1,18 +1,18 @@
 % DEMO Statistical analysis: comparison between LBM, modularity, and multilayer modularity
-% individual-level analysis
-
-% Version 1.0
-% 7-April-2025
+% individual-level analysis (added multiple comparison correction: FDR)
+%
+% Version 1.1 
+% 17-Nov-2025
 % Copyright (c) 2025, Lingbin Bian
 
 clear
 clc
 close all
 
-condition=3;
+condition=3; % for each data segment
 n_s=0.3162;
 DIIV=30;
-reso=[1,1.5,2];
+reso=[1,1.5,2]; % modularity resolution gamma
 reso_axis={'1','1.5','2'};
 data1=zeros(100,length(reso));
 data2=zeros(100,length(reso));
@@ -56,11 +56,7 @@ for i=1:length(reso)
     NMI_indi_temporal=zeros(100,1);
 end
 
-%age_range={'0-5 vs 6-11 Month', '3-8 vs 9-14 Month', '6-11 vs 12-17 Month','9-14 vs 15-23 Month','12-17 vs 18-29 Month','15-23 vs 24-36 Month','18-29 vs >36 Month'};
-
-% data1=corre_hier;  % n by m matrix; n: number of samples, m: length of age range
-% data2=corre_ave;   % n by m matrix; n: number of samples, m: length of age range
-
+% figure and plotting
 figure
 % edge color
 edgecolor1=[0,0,0]; % black color
@@ -68,17 +64,6 @@ edgecolor2=[0,0,0]; % black color
 edgecolor3=[0,0,0]; % black color
 edgecolor4=[0,0,0]; % black color
 edgecolor5=[0,0,0]; % black color
-%fillcolor
-% 0.75 0.75 0.75
-% 1,0.87,0.68
-% 1,1,0;
-% 0.78,0.38,0.08;
-% 0,0,1;
-% 1,0,0;
-% 0,1,0;
-% 0,0.5,0;
-% 0.5,0.5,0;
-% 1,0.5,0.5;
 
 fillcolor5=[0,0,1]; % fillcolors = rand(24, 3);
 fillcolor4=[1,0,0];
@@ -116,13 +101,6 @@ boxchi = get(gca, 'Children');
 hLegend=legend([boxchi(1),boxchi(4),boxchi(7),boxchi(10),boxchi(13)], ["Latent Block Model","Modularity","Multilayer Modularity \omega=0.01","Multilayer Modularity \omega=0.1","Multilayer Modularity \omega=0.5"],'location','southeast','FontSize', 10 );
 xlim([0.5,3.5]); % range of y
 
-% if DIIV==10
-%     ylim([0.4,1.5]); % range of y
-% elseif DIIV==20
-%     ylim([0.3,1.5]); % range of y
-% else
-%     ylim([0.1,1.5]); % range of y
-% end
 ylim([0.3,1.5]); % range of y
 set(gca,'xticklabel',reso_axis,'FontSize',12);
 set(gca, 'linewidth', 1.2, 'fontsize', 16, 'fontname', 'times')   
@@ -133,84 +111,132 @@ title(['Experiment ',num2str(condition),', DIIV=',num2str(DIIV),])
 set(gcf,'unit','centimeters','position',[6 10 20 16])
 set(gca,'Position',[.22 .28 .75 .6]);
 
-sig_x=zeros(length(reso),2);
-sig_y=zeros(length(reso),1);
+% -------------------------------------------------------------------------
+% New statistics block: collect p-values, run FDR (BH), and plot corrected siglines
+% -------------------------------------------------------------------------
 
-p_v=zeros(length(reso),1);
-h=zeros(length(reso),1);
-ci=cell(length(reso),1);
-stats=cell(length(reso),1);
+% Preallocate containers
+num_reso = length(reso);
+num_comp = 4 * num_reso; % 4 comparisons per gamma
+p_all = zeros(1,num_comp);      % t-test p-values
+p_v_all = zeros(1,num_comp);    % vartest p-values (variance test)
+positions_all = cell(1,num_comp);
+y_all = zeros(1,num_comp);
+comp_names = cell(1,num_comp);
 
-p=zeros(length(reso),1);
-h1=zeros(length(reso),1);
-ci1=cell(length(reso),1);
+idx = 0;
 
-x=[0.7,0.85];
-
-for i=1:length(reso)
-    [h(i),p_v(i),ci{i},stats{i}] = vartest2(data1(:,i),data2(:,i));
+% 1) LBM vs Modularity
+x = [0.7,0.85];
+for i=1:num_reso
+    idx = idx + 1;
+    [h_v,p_v] = vartest2(data1(:,i),data2(:,i));
     if p_v < 0.05
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data2(:,i),'Vartype','unequal');
+        [h_t,p] = ttest2(data1(:,i),data2(:,i),'Vartype','unequal');
     else
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data2(:,i));
+        [h_t,p] = ttest2(data1(:,i),data2(:,i));
     end
-    sigline(x,max(max([data1(:,i),data2(:,i)])), p(i),p_v(i)); %
-    x=x+1;
+    p_all(idx) = p;
+    p_v_all(idx) = p_v;
+    positions_all{idx} = x;
+    y_all(idx) = max(max([data1(:,i),data2(:,i)]));
+    comp_names{idx} = sprintf('LBM vs Modularity (gamma=%g)', reso(i));
+    x = x + 1;
 end
 
-x=[0.7,1];
-
-for i=1:length(reso)
-    [h(i),p_v(i),ci{i},stats{i}] = vartest2(data1(:,i),data3(:,i));
+% 2) LBM vs Multilayer (omega = 0.01)
+x = [0.7,1.0];
+for i=1:num_reso
+    idx = idx + 1;
+    [h_v,p_v] = vartest2(data1(:,i),data3(:,i));
     if p_v < 0.05
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data3(:,i),'Vartype','unequal');
+        [h_t,p] = ttest2(data1(:,i),data3(:,i),'Vartype','unequal');
     else
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data3(:,i));
+        [h_t,p] = ttest2(data1(:,i),data3(:,i));
     end
-    sigline(x,1.12*max(max([data1(:,i),data3(:,i)])), p(i),p_v(i)); %
-    x=x+1;
+    p_all(idx) = p;
+    p_v_all(idx) = p_v;
+    positions_all{idx} = x;
+    y_all(idx) = 1.12 * max(max([data1(:,i),data3(:,i)]));
+    comp_names{idx} = sprintf('LBM vs MMult w=0.01 (gamma=%g)', reso(i));
+    x = x + 1;
 end
 
-x=[0.7,1.15];
-
-for i=1:length(reso)
-    [h(i),p_v(i),ci{i},stats{i}] = vartest2(data1(:,i),data4(:,i));
+% 3) LBM vs Multilayer (omega = 0.1)
+x = [0.7,1.15];
+for i=1:num_reso
+    idx = idx + 1;
+    [h_v,p_v] = vartest2(data1(:,i),data4(:,i));
     if p_v < 0.05
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data4(:,i),'Vartype','unequal');
+        [h_t,p] = ttest2(data1(:,i),data4(:,i),'Vartype','unequal');
     else
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data4(:,i));
+        [h_t,p] = ttest2(data1(:,i),data4(:,i));
     end
-    sigline(x,1.25*max(max([data1(:,i),data4(:,i)])), p(i),p_v(i)); %
-    x=x+1;
+    p_all(idx) = p;
+    p_v_all(idx) = p_v;
+    positions_all{idx} = x;
+    y_all(idx) = 1.25 * max(max([data1(:,i),data4(:,i)]));
+    comp_names{idx} = sprintf('LBM vs MMult w=0.1 (gamma=%g)', reso(i));
+    x = x + 1;
 end
 
-x=[0.7,1.3];
-
-for i=1:length(reso)
-    [h(i),p_v(i),ci{i},stats{i}] = vartest2(data1(:,i),data5(:,i));
+% 4) LBM vs Multilayer (omega = 0.5)
+x = [0.7,1.3];
+for i=1:num_reso
+    idx = idx + 1;
+    [h_v,p_v] = vartest2(data1(:,i),data5(:,i));
     if p_v < 0.05
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data5(:,i),'Vartype','unequal');
+        [h_t,p] = ttest2(data1(:,i),data5(:,i),'Vartype','unequal');
     else
-        [h1(i),p(i),ci1{i}] = ttest2(data1(:,i),data5(:,i));
+        [h_t,p] = ttest2(data1(:,i),data5(:,i));
     end
-    sigline(x,1.35*max(max([data1(:,i),data5(:,i)])), p(i),p_v(i)); %
-    x=x+1;
+    p_all(idx) = p;
+    p_v_all(idx) = p_v;
+    positions_all{idx} = x;
+    y_all(idx) = 1.35 * max(max([data1(:,i),data5(:,i)]));
+    comp_names{idx} = sprintf('LBM vs MMult w=0.5 (gamma=%g)', reso(i));
+    x = x + 1;
 end
 
-% 
+% Perform FDR correction on t-test p-values and vartest p-values
+if exist('mafdr','file') == 2
+    % Use MATLAB's mafdr if available
+    p_fdr = mafdr(p_all, 'BHFDR', true);
+    p_v_fdr = mafdr(p_v_all, 'BHFDR', true);
+else
+    % Fallback to Benjamini-Hochberg implementation (returns corrected p-values)
+    p_fdr = benjamini_hochberg(p_all);
+    p_v_fdr = benjamini_hochberg(p_v_all);
+end
+
+% Draw significance markers using corrected p-values
+for k = 1:length(p_all)
+    % Use corrected p-values for plotting
+    sigline(positions_all{k}, y_all(k), p_fdr(k), p_v_fdr(k));
+end
+
+% Print a summary table
+fprintf('\nComparison results (original p, FDR-corrected p):\n');
+for k = 1:length(p_all)
+    fprintf('%2d) %s\n   t-test p = %.4g, FDR p = %.4g; vartest p = %.4g, FDR p = %.4g\n', ...
+        k, comp_names{k}, p_all(k), p_fdr(k), p_v_all(k), p_v_fdr(k));
+end
+
+% Update legend labels (unchanged behavior)
 currentLabels = hLegend.String; % Get current labels (cell array)
 Labels_remove={currentLabels{1},currentLabels{2},currentLabels{3},currentLabels{4},currentLabels{5}};
 hLegend.String=Labels_remove;
 
-
 data_path = fileparts(mfilename('fullpath'));
 
+% optionally save results
 results_path=fullfile(data_path,['Results/synthetic_LBM/','DIIV',num2str(DIIV),'/n',num2str(n_s),'/statistical_analysis_individual_LBM_M_MM',num2str(condition)]);
 save(results_path); 
 saveas(gcf,['Results/synthetic_LBM/','DIIV',num2str(DIIV),'/n',num2str(n_s),'/statistical_analysis_individual_LBM_M_MM',num2str(condition),'_DIIV_',num2str(DIIV),'.fig'])
 saveas(gcf,['Results/synthetic_LBM/','DIIV',num2str(DIIV),'/n',num2str(n_s),'/statistical_analysis_individual_LBM_M_MM',num2str(condition),'_DIIV_',num2str(DIIV),'.svg'])
+
 % -------------------------------------------------------------------------
-% sigline
+% sigline (unchanged, uses supplied p and p_v values)
 function sigline(x, y, p, p_v)
 hold on
 x = x';
@@ -222,12 +248,12 @@ if p<0.001
 
 elseif (0.001<=p)&&(p<0.01)
     plot(mean(x)- 0.03, y*1.075, '*k')         % the sig star sign
-    plot(mean(x)+ 0.03, y*1.075, '*k')         % the sig star sign
+    plot(mean(x)+ 0.03, y*1.075, '*k')          % the sig star sign
 
 elseif (0.01<=p)&&(p<0.05)
     plot(mean(x), y*1.075, '*k')               % the sig star sign
 else
-    %print('not significance');
+    % not significant for t-test (after correction)
 end
 
 if p_v<0.001
@@ -242,9 +268,8 @@ elseif (0.001<=p_v)&&(p_v<0.01)
 elseif (0.01<=p_v)&&(p_v<0.05)
     plot(mean(x), y*1.105, 'pentagram','color',[0 0 0])               % the sig star sign
 else
-    fprintf('no significance ');
+    % not significant for vartest (after correction)
 end
-
 
 plot(x, [1;1]*y*1.05, '-k', 'LineWidth',0.5); % significance horizontal line
 plot([1;1]*x(1), [y*1.025, y*1.05], '-k', 'LineWidth', 0.5); % significance vertical line
@@ -253,6 +278,38 @@ plot([1;1]*x(2), [y*1.025, y*1.05], '-k', 'LineWidth', 0.5); % significance vert
 hold off
 end
 
-
-
+% -------------------------------------------------------------------------
+% Benjamini-Hochberg FDR implementation (returns adjusted p-values)
+function p_adj = benjamini_hochberg(p)
+    % Input: p: vector of p-values
+    % Output: p_adj: BH-adjusted p-values (same length), monotonic non-decreasing
+    if isempty(p)
+        p_adj = p;
+        return;
+    end
+    
+    % Sort p-values
+    [p_sorted, sort_idx] = sort(p(:));
+    m = length(p_sorted);
+    
+    % Allocate adjusted p-value array
+    p_adj_sorted = zeros(size(p_sorted));
+    
+    % Compute BH adjusted p-values (step-up procedure)
+    for i = m:-1:1
+        if i == m
+            p_adj_sorted(i) = p_sorted(i);
+        else
+            p_adj_sorted(i) = min(p_sorted(i) * m / i, p_adj_sorted(i+1));
+        end
+    end
+    
+    % Cap at 1
+    p_adj_sorted = min(p_adj_sorted, 1);
+    
+    % Unsort to original order
+    p_adj = zeros(size(p));
+    p_adj(sort_idx) = p_adj_sorted;
+    p_adj = reshape(p_adj, size(p));
+end
 
