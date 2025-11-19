@@ -126,9 +126,7 @@ MANIP_individual_calcu_NMI_multilayer_modularity.m
 
 5.Statistical analysis (individual-level analysis)
 ---------------------------------------------------------------------------
-DEMO_individual_statistical_analysis_modularity.m (LBM vs modularity)
-
-DEMO_individual_statistical_analysis_multilayer_modularity.m (LBM vs multilayer modularity)
+DEMO_individual_statistical_analysis
 
 6.SNR analysis, NMI of LBM against different levels of SNR (individual-level analysis)
 DEMO_individual_statistical_analysis_snr.m
