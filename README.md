@@ -174,7 +174,7 @@ MANIP_individual_between_conditions_2b0bfix_NMI_real_LBM
 ---------------------------------------------------------------------------
 DEMO_group_brainnet_viewer.m
 
-13.Bayesian optimization
+13.Hyperparameter optimization
 ---------------------------------------------------------------------------
 ANAL_Bayesian_optimization_LBM.m
 ANAL_Bayesian_optimization_LBM_real.m
