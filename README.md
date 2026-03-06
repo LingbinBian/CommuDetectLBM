@@ -1,7 +1,9 @@
 Hierarchical Bayesian inference for community detection and connectivity of functional brain networks
 ---------------------------------------------------------------------------
 Version 1.0
+
 6-March-2026
+
 Copyright (c) 2026, Lingbin Bian
 
 Main functions of community detection:
