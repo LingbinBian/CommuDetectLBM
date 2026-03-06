@@ -1,0 +1,258 @@
+-- ANAL_Bayesian_optimization_LBM_real --
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to parallel pool with 32 workers.
+Atlas: 1
+Adjacency matrix of subject: 1
+Adjacency matrix of subject: 2
+Adjacency matrix of subject: 3
+Adjacency matrix of subject: 4
+Adjacency matrix of subject: 5
+Adjacency matrix of subject: 6
+Adjacency matrix of subject: 7
+Adjacency matrix of subject: 8
+Adjacency matrix of subject: 9
+Adjacency matrix of subject: 10
+Adjacency matrix of subject: 11
+Adjacency matrix of subject: 12
+Adjacency matrix of subject: 13
+Adjacency matrix of subject: 14
+Adjacency matrix of subject: 15
+Adjacency matrix of subject: 16
+Adjacency matrix of subject: 17
+Adjacency matrix of subject: 18
+Adjacency matrix of subject: 19
+Adjacency matrix of subject: 20
+Adjacency matrix of subject: 21
+Adjacency matrix of subject: 22
+Adjacency matrix of subject: 23
+Adjacency matrix of subject: 24
+Adjacency matrix of subject: 25
+Adjacency matrix of subject: 26
+Adjacency matrix of subject: 27
+Adjacency matrix of subject: 28
+Adjacency matrix of subject: 29
+Adjacency matrix of subject: 30
+Adjacency matrix of subject: 31
+Adjacency matrix of subject: 32
+Adjacency matrix of subject: 33
+Adjacency matrix of subject: 34
+Adjacency matrix of subject: 35
+Adjacency matrix of subject: 36
+Adjacency matrix of subject: 37
+Adjacency matrix of subject: 38
+Adjacency matrix of subject: 39
+Adjacency matrix of subject: 40
+Adjacency matrix of subject: 41
+Adjacency matrix of subject: 42
+Adjacency matrix of subject: 43
+Adjacency matrix of subject: 44
+Adjacency matrix of subject: 45
+Adjacency matrix of subject: 46
+Adjacency matrix of subject: 47
+Adjacency matrix of subject: 48
+Adjacency matrix of subject: 49
+Adjacency matrix of subject: 50
+Adjacency matrix of subject: 51
+Adjacency matrix of subject: 52
+Adjacency matrix of subject: 53
+Adjacency matrix of subject: 54
+Adjacency matrix of subject: 55
+Adjacency matrix of subject: 56
+Adjacency matrix of subject: 57
+Adjacency matrix of subject: 58
+Adjacency matrix of subject: 59
+Adjacency matrix of subject: 60
+Adjacency matrix of subject: 61
+Adjacency matrix of subject: 62
+Adjacency matrix of subject: 63
+Adjacency matrix of subject: 64
+Adjacency matrix of subject: 65
+Adjacency matrix of subject: 66
+Adjacency matrix of subject: 67
+Adjacency matrix of subject: 68
+Adjacency matrix of subject: 69
+Adjacency matrix of subject: 70
+Adjacency matrix of subject: 71
+Adjacency matrix of subject: 72
+Adjacency matrix of subject: 73
+Adjacency matrix of subject: 74
+Adjacency matrix of subject: 75
+Adjacency matrix of subject: 76
+Adjacency matrix of subject: 77
+Adjacency matrix of subject: 78
+Adjacency matrix of subject: 79
+Adjacency matrix of subject: 80
+Adjacency matrix of subject: 81
+Adjacency matrix of subject: 82
+Adjacency matrix of subject: 83
+Adjacency matrix of subject: 84
+Adjacency matrix of subject: 85
+Adjacency matrix of subject: 86
+Adjacency matrix of subject: 87
+Adjacency matrix of subject: 88
+Adjacency matrix of subject: 89
+Adjacency matrix of subject: 90
+Adjacency matrix of subject: 91
+Adjacency matrix of subject: 92
+Adjacency matrix of subject: 93
+Adjacency matrix of subject: 94
+Adjacency matrix of subject: 95
+Adjacency matrix of subject: 96
+Adjacency matrix of subject: 97
+Adjacency matrix of subject: 98
+Adjacency matrix of subject: 99
+Adjacency matrix of subject: 100
+Combination: 6
+|===================================================================================================================================|
+| Iter | Eval   | Objective   | Objective   | BestSoFar   | BestSoFar   |           nu |          rho |     kappa_sq |        K_max |
+|      | result |             | runtime     | (observed)  | (estim.)    |              |              |              |              |
+|===================================================================================================================================|
+|    1 | Best   |    -0.21935 |      119.22 |    -0.21935 |    -0.21935 |        12.42 |    0.0082879 |       1.2722 |           22 |
+|    2 | Accept |     -0.2127 |       67.24 |    -0.21935 |    -0.21889 |       13.356 |     0.019004 |      0.16346 |            7 |
+|    3 | Best   |    -0.40727 |      287.98 |    -0.40727 |    -0.40725 |       10.173 |      0.89136 |       2.0537 |           15 |
+|    4 | Accept |    -0.37592 |      185.71 |    -0.40727 |    -0.40725 |       3.3798 |     0.011958 |      0.36996 |           13 |
+|    5 | Best   |    -0.44735 |      189.33 |    -0.44735 |    -0.44733 |       7.1953 |      0.98383 |      0.18288 |           10 |
+|    6 | Best   |    -0.55111 |      141.92 |    -0.55111 |    -0.55106 |       2.7441 |      0.99561 |      0.17732 |            7 |
+|    7 | Best   |    -0.55403 |       155.1 |    -0.55403 |    -0.55415 |       2.1096 |      0.94965 |      0.17079 |           22 |
+|    8 | Best   |    -0.62301 |      131.58 |    -0.62301 |    -0.62293 |       2.1012 |      0.40437 |      0.15951 |            6 |
+|    9 | Accept |    -0.47846 |      317.15 |    -0.62301 |    -0.62294 |       2.1094 |      0.17353 |       1.4855 |           14 |
+|   10 | Accept |    -0.48254 |      205.83 |    -0.62301 |    -0.56563 |       2.8033 |      0.47806 |       0.1837 |           14 |
+|   11 | Accept |    -0.57912 |      161.22 |    -0.62301 |    -0.56932 |       2.1018 |      0.95457 |       1.6022 |           16 |
+|   12 | Accept |    -0.49669 |      129.38 |    -0.62301 |    -0.55356 |       2.1075 |      0.94576 |       1.6002 |            6 |
+|   13 | Accept |    -0.44078 |      221.64 |    -0.62301 |    -0.55338 |       2.1186 |    0.0010033 |       6.0488 |           23 |
+|   14 | Accept |    -0.24328 |      95.916 |    -0.62301 |    -0.55511 |       5.4418 |    0.0010002 |       2.3215 |           11 |
+|   15 | Accept |   -0.032756 |      45.246 |    -0.62301 |    -0.55522 |       14.961 |    0.0010064 |       7.6119 |            7 |
+|   16 | Accept |    -0.57516 |      162.19 |    -0.62301 |    -0.55889 |       2.1034 |      0.97175 |       0.5868 |           22 |
+|   17 | Accept |    -0.41661 |      153.34 |    -0.62301 |     -0.5629 |       14.989 |      0.99241 |      0.15596 |            7 |
+|   18 | Accept |    -0.48619 |      128.82 |    -0.62301 |    -0.56848 |       2.1138 |    0.0010704 |      0.10291 |           21 |
+|   19 | Accept |    -0.48323 |      152.26 |    -0.62301 |    -0.56694 |       2.1002 |     0.021704 |      0.10396 |            7 |
+|   20 | Accept |    -0.48026 |      165.35 |    -0.62301 |    -0.54983 |         2.11 |      0.62718 |      0.10361 |           10 |
+|===================================================================================================================================|
+| Iter | Eval   | Objective   | Objective   | BestSoFar   | BestSoFar   |           nu |          rho |     kappa_sq |        K_max |
+|      | result |             | runtime     | (observed)  | (estim.)    |              |              |              |              |
+|===================================================================================================================================|
+|   21 | Accept |    -0.56329 |      161.86 |    -0.62301 |    -0.55258 |       4.4711 |      0.98901 |       19.721 |           21 |
+|   22 | Accept |    -0.55364 |      131.31 |    -0.62301 |    -0.55085 |       2.1468 |     0.001008 |       15.084 |            6 |
+|   23 | Accept |      -0.362 |      472.97 |    -0.62301 |    -0.55154 |        6.253 |     0.086218 |       7.5635 |           21 |
+|   24 | Accept |    -0.41718 |      251.32 |    -0.62301 |    -0.55203 |       2.1006 |     0.003705 |       1.7488 |           15 |
+|   25 | Accept |    -0.53355 |      157.59 |    -0.62301 |    -0.55281 |       3.7619 |      0.99901 |      0.12294 |            9 |
+|   26 | Accept |    -0.47353 |      128.82 |    -0.62301 |    -0.55183 |       2.9836 |    0.0010006 |      0.53663 |           14 |
+|   27 | Accept |     -0.4643 |      132.52 |    -0.62301 |    -0.54978 |       14.894 |      0.27564 |       0.7903 |            6 |
+|   28 | Accept |    -0.49572 |      155.71 |    -0.62301 |    -0.54491 |       6.5892 |    0.0099112 |       19.796 |           12 |
+|   29 | Accept |    -0.52992 |      175.27 |    -0.62301 |    -0.54554 |       4.6431 |      0.99104 |       4.6384 |           10 |
+|   30 | Accept |    -0.46222 |      147.45 |    -0.62301 |    -0.62299 |       10.202 |      0.12406 |      0.15424 |           23 |
+|   31 | Accept |    -0.59386 |       156.2 |    -0.62301 |    -0.61819 |       2.2127 |      0.36797 |      0.49722 |            7 |
+|   32 | Accept |    -0.48713 |      131.44 |    -0.62301 |    -0.61814 |       2.1603 |    0.0014247 |      0.60897 |            6 |
+|   33 | Accept |     -0.5621 |      134.17 |    -0.62301 |     -0.6229 |       2.1269 |      0.41296 |       7.4685 |            6 |
+|   34 | Accept |    -0.46561 |      148.46 |    -0.62301 |    -0.54994 |       2.7429 |      0.97928 |       13.945 |           19 |
+|   35 | Accept |    -0.21171 |      64.762 |    -0.62301 |    -0.54197 |       8.9781 |    0.0010029 |       9.8361 |           11 |
+|   36 | Accept |    -0.49636 |      161.82 |    -0.62301 |    -0.55157 |       8.2552 |       0.0239 |       5.8365 |           24 |
+|   37 | Accept |    -0.42921 |      413.65 |    -0.62301 |    -0.55069 |       3.7217 |     0.087533 |       13.446 |           17 |
+|   38 | Accept |     -0.4231 |      223.23 |    -0.62301 |    -0.55053 |       4.8596 |     0.021183 |        3.863 |           11 |
+|   39 | Accept |    -0.53237 |      114.66 |    -0.62301 |    -0.55036 |       4.5547 |    0.0039415 |      0.20011 |           20 |
+|   40 | Accept |    -0.47367 |      240.12 |    -0.62301 |    -0.55005 |       4.8205 |      0.29686 |        6.258 |           10 |
+|===================================================================================================================================|
+| Iter | Eval   | Objective   | Objective   | BestSoFar   | BestSoFar   |           nu |          rho |     kappa_sq |        K_max |
+|      | result |             | runtime     | (observed)  | (estim.)    |              |              |              |              |
+|===================================================================================================================================|
+|   41 | Accept |    -0.45337 |      114.17 |    -0.62301 |    -0.55031 |       14.992 |     0.073934 |      0.73756 |           10 |
+|   42 | Accept |    -0.39463 |      88.735 |    -0.62301 |    -0.55095 |       7.5694 |    0.0030534 |       15.511 |            7 |
+|   43 | Accept |    -0.36696 |      279.68 |    -0.62301 |    -0.55144 |       7.7506 |      0.32466 |      0.17335 |           24 |
+|   44 | Accept |    -0.26873 |       126.9 |    -0.62301 |    -0.55228 |       2.9237 |    0.0037892 |      0.11054 |           12 |
+|   45 | Accept |  0.00089303 |      48.908 |    -0.62301 |    -0.55265 |       14.997 |    0.0040737 |      0.55955 |           23 |
+|   46 | Accept |    -0.50927 |      266.02 |    -0.62301 |     -0.5516 |       2.7608 |     0.048683 |       8.2108 |           11 |
+|   47 | Accept |    -0.44853 |      242.34 |    -0.62301 |    -0.55222 |       2.9716 |      0.16973 |      0.16529 |           11 |
+|   48 | Accept |    -0.13079 |      65.247 |    -0.62301 |    -0.55209 |        10.93 |    0.0024339 |       2.2176 |            8 |
+|   49 | Accept |    -0.42345 |      303.48 |    -0.62301 |    -0.55201 |       2.4813 |     0.011377 |       6.7793 |           14 |
+|   50 | Accept |    -0.45123 |      103.35 |    -0.62301 |    -0.55227 |       10.864 |     0.042921 |      0.23305 |           15 |
+|   51 | Accept |     -0.4735 |      95.624 |    -0.62301 |    -0.55323 |       8.9949 |    0.0086654 |         4.15 |           15 |
+|   52 | Accept |    -0.40796 |      107.62 |    -0.62301 |    -0.55325 |       4.0549 |    0.0010069 |       0.6094 |            6 |
+|   53 | Accept |    -0.32911 |      502.08 |    -0.62301 |    -0.55308 |       11.631 |      0.35467 |       4.1898 |           21 |
+|   54 | Accept |    -0.39158 |      240.49 |    -0.62301 |    -0.55301 |       3.6323 |     0.031798 |       0.3891 |           18 |
+|   55 | Accept |     -0.3604 |      172.18 |    -0.62301 |    -0.55295 |         8.19 |      0.07204 |      0.27839 |           19 |
+|   56 | Accept |    -0.29391 |      119.46 |    -0.62301 |    -0.55253 |       5.7719 |    0.0033016 |       6.5013 |           16 |
+|   57 | Accept |    -0.37467 |      226.16 |    -0.62301 |    -0.55254 |       4.8156 |     0.077881 |      0.14301 |           12 |
+|   58 | Accept |    -0.47735 |       232.1 |    -0.62301 |    -0.55256 |       3.7789 |      0.32054 |         0.88 |           10 |
+|   59 | Accept |     -0.4123 |       184.9 |    -0.62301 |    -0.55285 |       6.2772 |     0.029377 |      0.89672 |           11 |
+|   60 | Accept |    -0.38045 |      80.789 |    -0.62301 |    -0.55177 |        6.987 |    0.0010091 |       1.4269 |           18 |
+|===================================================================================================================================|
+| Iter | Eval   | Objective   | Objective   | BestSoFar   | BestSoFar   |           nu |          rho |     kappa_sq |        K_max |
+|      | result |             | runtime     | (observed)  | (estim.)    |              |              |              |              |
+|===================================================================================================================================|
+|   61 | Accept |    -0.57504 |       155.8 |    -0.62301 |    -0.55175 |       6.1023 |       0.4158 |      0.54489 |            7 |
+|   62 | Accept |    -0.48872 |      194.74 |    -0.62301 |     -0.5507 |        5.214 |      0.99929 |      0.47302 |           17 |
+|   63 | Accept |    -0.38108 |      148.07 |    -0.62301 |    -0.55055 |       3.7183 |    0.0025665 |        1.175 |           20 |
+|   64 | Accept |    -0.32854 |      219.34 |    -0.62301 |     -0.5491 |        12.81 |      0.12005 |       14.117 |           10 |
+|   65 | Accept |    -0.47161 |      149.13 |    -0.62301 |    -0.54931 |       2.4951 |    0.0010033 |       6.1655 |            7 |
+|   66 | Accept |     -0.4163 |      149.65 |    -0.62301 |    -0.54943 |       4.3762 |    0.0089285 |      0.38211 |           11 |
+|   67 | Accept |    -0.52129 |       311.4 |    -0.62301 |    -0.54957 |       2.1003 |     0.053773 |       15.095 |           12 |
+|   68 | Accept |    -0.50658 |      247.98 |    -0.62301 |    -0.54883 |       12.408 |      0.99459 |       3.9368 |           11 |
+|   69 | Accept |    0.048274 |      52.109 |    -0.62301 |    -0.55028 |       12.276 |    0.0010125 |       2.7717 |           15 |
+|   70 | Accept |    -0.42678 |      146.87 |    -0.62301 |    -0.55052 |          5.4 |    0.0091976 |       11.897 |            8 |
+|   71 | Accept |    -0.42543 |      252.61 |    -0.62301 |    -0.54961 |       2.4789 |       0.1155 |      0.11833 |           14 |
+|   72 | Accept |    -0.42779 |      111.25 |    -0.62301 |    -0.55083 |       10.286 |     0.016771 |       12.062 |           22 |
+|   73 | Accept |    -0.14192 |      64.956 |    -0.62301 |    -0.55143 |       14.995 |     0.013766 |       1.1099 |           13 |
+|   74 | Accept |    -0.44825 |      212.11 |    -0.62301 |     -0.5515 |       2.4163 |     0.030887 |      0.12552 |           23 |
+|   75 | Accept |    -0.49742 |      156.68 |    -0.62301 |    -0.55189 |       3.1675 |      0.96767 |      0.21445 |           11 |
+|   76 | Accept |    -0.42429 |       183.8 |    -0.62301 |    -0.55214 |       2.9315 |     0.020647 |      0.15889 |           10 |
+|   77 | Accept |    -0.48488 |      234.95 |    -0.62301 |    -0.55143 |       8.5628 |      0.97397 |       8.5056 |           19 |
+|   78 | Accept |    -0.52699 |      210.54 |    -0.62301 |    -0.55184 |       5.7071 |      0.18837 |       1.9264 |            9 |
+|   79 | Accept |     -0.4267 |      192.05 |    -0.62301 |    -0.55134 |        9.388 |      0.34934 |      0.11136 |            9 |
+|   80 | Accept |    -0.49711 |      96.851 |    -0.62301 |    -0.55052 |         4.67 |    0.0016843 |       0.2417 |            6 |
+|===================================================================================================================================|
+| Iter | Eval   | Objective   | Objective   | BestSoFar   | BestSoFar   |           nu |          rho |     kappa_sq |        K_max |
+|      | result |             | runtime     | (observed)  | (estim.)    |              |              |              |              |
+|===================================================================================================================================|
+|   81 | Accept |    -0.42087 |      254.85 |    -0.62301 |    -0.55088 |       2.1013 |    0.0086235 |      0.79293 |           23 |
+|   82 | Accept |    -0.26234 |      78.358 |    -0.62301 |    -0.54935 |        9.015 |    0.0029763 |       5.0933 |           16 |
+|   83 | Accept |     -0.3673 |      394.42 |    -0.62301 |    -0.54919 |       13.924 |      0.57324 |       15.276 |           22 |
+|   84 | Accept |    -0.40907 |      247.02 |    -0.62301 |    -0.54954 |       4.2808 |      0.57368 |       0.6196 |           25 |
+|   85 | Accept |    -0.25309 |      272.36 |    -0.62301 |    -0.55843 |       14.955 |      0.14388 |       13.208 |           25 |
+|   86 | Accept |    -0.55146 |      131.66 |    -0.62301 |    -0.55822 |       5.7772 |      0.74493 |           20 |            6 |
+|   87 | Accept |    -0.55031 |      152.37 |    -0.62301 |    -0.56125 |       5.5561 |      0.99656 |       19.371 |            7 |
+|   88 | Accept |    -0.56167 |       132.8 |    -0.62301 |    -0.56851 |        2.128 |      0.47943 |       0.5442 |            6 |
+|   89 | Accept |    -0.49076 |      213.25 |    -0.62301 |    -0.55489 |       2.1088 |      0.49105 |       1.0378 |           12 |
+|   90 | Accept |    -0.47227 |       155.8 |    -0.62301 |    -0.54541 |       5.6214 |      0.88788 |       4.3726 |            7 |
+|   91 | Accept |      -0.439 |      117.79 |    -0.62301 |    -0.54542 |       4.5247 |    0.0010442 |        4.474 |           25 |
+|   92 | Accept |    -0.30631 |      194.02 |    -0.62301 |    -0.54555 |       5.3277 |     0.016501 |       3.0299 |           25 |
+|   93 | Accept |    -0.49294 |      120.47 |    -0.62301 |    -0.54565 |        8.501 |     0.024569 |       14.825 |            6 |
+|   94 | Accept |    -0.41428 |       73.92 |    -0.62301 |    -0.55028 |       14.938 |     0.033469 |      0.26321 |           25 |
+|   95 | Accept |    -0.59281 |      128.39 |    -0.62301 |    -0.55127 |       4.2411 |      0.88258 |       18.688 |            6 |
+|   96 | Accept |    -0.41003 |      160.45 |    -0.62301 |    -0.54508 |       4.0872 |      0.89719 |       19.447 |            8 |
+|   97 | Accept |    -0.53093 |      183.98 |    -0.62301 |     -0.5446 |       2.5326 |    0.0026487 |       1.2416 |           25 |
+|   98 | Accept |    -0.49059 |      132.26 |    -0.62301 |    -0.54444 |       3.7117 |     0.059332 |       4.3048 |            6 |
+|   99 | Accept |    -0.10732 |      46.221 |    -0.62301 |    -0.54407 |       14.579 |    0.0010201 |       4.4583 |           25 |
+|  100 | Accept |    -0.60203 |      128.84 |    -0.62301 |    -0.54407 |       7.6138 |      0.14035 |       4.8024 |            6 |
+
+__________________________________________________________
+Optimization completed.
+MaxObjectiveEvaluations of 100 reached.
+Total function evaluations: 100
+Total elapsed time: 17412.5336 seconds
+Total objective function evaluation time: 17330.0912
+
+Best observed feasible point:
+      nu        rho      kappa_sq    K_max
+    ______    _______    ________    _____
+
+    2.1012    0.40437    0.15951       6  
+
+Observed objective function value = -0.62301
+Estimated objective function value = -0.54603
+Function evaluation time = 131.582
+
+Best estimated feasible point (according to models):
+     nu       rho      kappa_sq    K_max
+    ____    _______    ________    _____
+
+    2.11    0.62718    0.10361      10  
+
+Estimated objective function value = -0.54407
+Estimated function evaluation time = 162.6846
+
+
+Optimal parameters (Group-level tuned):
+nu = 2.1012
+rho = 0.4044
+kappa_sq = 0.1595
+K_max = 6
