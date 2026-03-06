@@ -1,8 +1,8 @@
 Hierarchical Bayesian inference for community detection and connectivity of functional brain networks
 ---------------------------------------------------------------------------
 Version 1.0
-12-April-2025
-Copyright (c) 2025, Lingbin Bian
+6-March-2026
+Copyright (c) 2026, Lingbin Bian
 
 Main functions of community detection:
 ---------------------------------------------------------------------------
@@ -20,13 +20,8 @@ HBI_CommuDetect
 The code for processing working memory task-fMRI:
 ---------------------------------------------------------------------------
 tfMRI_Data_HCP
-
-Some pictures of the results: 
 ---------------------------------------------------------------------------
-Pictures_community_labels
-
----------------------------------------------------------------------------
-How to sun the code of the study in the paper: 
+How to run the code of the study in the paper: 
 ---------------------------------------------------------------------------
 Experiments: synthetic data analysis
 ---------------------------------------------------------------------------
@@ -80,39 +75,18 @@ Results---synthetic_LBM---DIIV10---n0.3162
                 |               ---n17.7828
                 ...
 
-DEMO_individual_modularity.m (synthetic data: data_type=0)
-                                 (DIIV)    (SNR)     (gamma)
-Results---synthetic_modularity---DIIV10---n0.3162---1 1.2 ... 2
-                |                      ---n0.5623
-                |                      ---n1
-                |                      ---n1.7783
-                |                      ---n3.1623
-                |                      ---n5.6234
-                |                      ---n10
-                |                      ---n17.7828
-                |----------------DIIV20---n0.3162
-                |                      ---n0.5623
-                |                      ---n1
-                |                      ---n1.7783
-                |                      ---n3.1623
-                |                      ---n5.6234
-                |                      ---n10
-                |                      ---n17.7828
-                ...
 
-
-DEMO_individual_multilayer_modularity.m (comparison with multilayer modularity)
-
-4.Comparing the estimated individual community mememberships with the ground truth (individual-level analysis) using normalized mutual information (NMI)
+5.Comparing LBM, (multilayer) modularity
 ---------------------------------------------------------------------------
-MANIP_individual_calcu_NMI_LBM.m 
-MANIP_individual_calcu_NMI_modularity.m
-MANIP_individual_calcu_NMI_multilayer_modularity.m
+ANAL_Bayesian_optimization_LBM.m
+ANAL_Bayesian_optimization_modularity.m
+ANAL_Bayesian_optimization_multilayer_modularity.m
 
-5.Statistical analysis (individual-level analysis)
----------------------------------------------------------------------------
-DEMO_individual_statistical_analysis_modularity.m (LBM vs modularity)
-DEMO_individual_statistical_analysis_multilayer_modularity.m (LBM vs multilayer modularity)
+ANAL_individual_LBM.m
+ANAL_individual_modularity.m
+ANAL_individual_multilayer_modularity.m
+
+ANAL_LBM_vs_modularity_opt.m
 
 6.SNR analysis, NMI of LBM against different levels of SNR (individual-level analysis)
 DEMO_individual_statistical_analysis_snr.m
@@ -129,8 +103,7 @@ MANIP_group_calcu_NMI_LBM.m
 DEMO_group_NMI_DIIV_LBM.m
 
 
-8.Estimate group-level community memberships based on consensus clustering (group-level analysis)
-DEMO_group_community_detection_Consensus.m
+8.Estimate group-level community memberships
 ---------------------------------------------------------------------------
 
 SNR analysis (group-level analysis)
@@ -147,16 +120,13 @@ Experiments: real data analysis
 ---------------------------------------------------------------------------
 10.Spit-half reproducibility analysis (comparing LBM, modularity, and multilayer modularity)
 ---------------------------------------------------------------------------
-DEMO_individual_LBM.m (real data: data_type=1)
+ANAL_Bayesian_optimization_LBM_real.m
+ANAL_Bayesian_optimization_modularity_real.m
+ANAL_Bayesian_optimization_multilayer_modularity_real.m
 
-MANIP_individual_calcu_NMI_real_LBM.m
-
-DEMO_individual_modularity.m (real data: data_type=1)
-MANIP_individual_calcu_NMI_real_modularity.m
-
-DEMO_individual_multilayer_modularity.m (real data: data_type=1)
-MANIP_individual_calcu_NMI_real_multilayer_modularity.m
-
+ANAL_individual_LBM_real.m
+ANAL_individual_modularity_real.m
+ANAL_individual_multilayer_modularity_real.m
 ---------------------------------------------------------------------------
 11.between subject consistency and subject-specific to group consistency
 ---------------------------------------------------------------------------
@@ -174,15 +144,9 @@ MANIP_individual_between_conditions_2b0bfix_NMI_real_LBM
 ---------------------------------------------------------------------------
 DEMO_group_brainnet_viewer.m
 
-13.Hyperparameter optimization
----------------------------------------------------------------------------
-ANAL_Bayesian_optimization_LBM.m
-ANAL_Bayesian_optimization_LBM_real.m
-ANAL_Bayesian_optimization_modularity.m
-ANAL_Bayesian_optimization_modularity_real.m
-ANAL_Bayesian_optimization_multilayer_modularity.m
-ANAL_Bayesian_optimization_multilayer_modularity_real.m
-ANAL_LBM_vs_modularity_opt.m
+
+
+
 
 
 
