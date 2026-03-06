@@ -1,15 +1,18 @@
-function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x,nu,rho,kappa_sq,K_max)
+function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x,K_max,nu,rho,kappa_sq)
 % Community detection for a single adjacency matrix
 % Latent block model (LBM) with Markov chain Monte Carlo (MCMC) allocation sampler
 % Syntax:
 %      default:
 %      [z_esti,K]=CommuDetectLBM(x)
 %      standard:
-%      [z_esti,K,z_chain,K_chain]=CommuDetectLBM(x,nu,rho,kappa_sq,K_max)
+%      [z_esti,K,z_chain,K_chain]=CommuDetectLBM(x,K_max,nu,rho,kappa_sq)
+%      nu:[2.1, 15], rho:[0.001, 2], kappa_sq:[0.1, 20], K_max:[6, 25]
 % Input:
 %      x: NxN adjacency matrix 
 %      K_max: maximum possible number of communities
-% Output:
+%      nu,rho: parameters of inverse gamma distribution (the distribution of block variance)
+%      kappa_sq: parameters of variance of normal distribution (the distribution of block mean)
+% Output: 
 %      z_esti: a vector of community memberships
 %      K: number of communities
 %      z_chain: a generated Markov chain updating community memberships (N x Itera matrix)
@@ -50,14 +53,10 @@ function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x,nu,rho,kappa_sq,K_max)
 %--------------------------------------------------------------------------
 % Parameter setting
 %--------------------------------------------------------------------------
-% Prior hyper-parameters of latent block model
 
 
 if nargin==1
     % Default settings   
-    nu=3;
-    rho=0.02;
-    kappa_sq=1;
     K_max=20;
 end
 
@@ -95,7 +94,7 @@ for s=1:S
    K_pos(1,s)=K_chain(:,burnin_ite+autocorre_time*s);
   
 end
-fprintf('label switching...\n')
+%fprintf('label switching...\n')
    latent_vector=labelswitch(z_pos);  % label switching
    %latent_vector=z_pos;
    % Estimate z (the most frequent value)
@@ -152,7 +151,7 @@ K_chain(1,1)=max(latent_ini);
 
 for ite=2:Itera
    
-    fprintf('MCMC iteration, total steps: 2000, step: %d\n',ite);
+    %fprintf('MCMC iteration, total steps: 2000, step: %d\n',ite);
     p_AE=0.5;
     ind=binornd(1,p_AE);
     %ind=randi(2);
