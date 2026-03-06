@@ -5,7 +5,7 @@ function [z_esti,K,z_chain,K_chain] = CommuDetectLBM(x,nu,rho,kappa_sq,K_max)
 %      default:
 %      [z_esti,K]=CommuDetectLBM(x)
 %      standard:
-%      [z_esti,K,z_chain,K_chain]=CommuDetectLBM(x,K_max)
+%      [z_esti,K,z_chain,K_chain]=CommuDetectLBM(x,nu,rho,kappa_sq,K_max)
 % Input:
 %      x: NxN adjacency matrix 
 %      K_max: maximum possible number of communities
