@@ -1,5 +1,4 @@
 Hierarchical Bayesian inference for community detection and connectivity of functional brain networks
-
 ---------------------------------------------------------------------------
 
 Version 1.0
