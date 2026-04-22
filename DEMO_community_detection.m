@@ -1,4 +1,4 @@
-% Demonstration of CommuDetectLBM.m and CommuDetectGroup
+% Demonstration of CommuDetectLBM.m and CommuDetectGroup.m
 % Version 1.0
 % 10-April-2025
 % Copyright (c) 2025, Lingbin Bian, 
